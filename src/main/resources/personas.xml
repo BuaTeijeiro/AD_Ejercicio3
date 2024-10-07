@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<personas>
+    <persona>
+        <nombre>Jose</nombre>
+        <edad>25</edad>
+    </persona>
+    <persona>
+        <nombre>Julie</nombre>
+        <edad>30</edad>
+    </persona>
+    <persona>
+        <nombre>Matěj</nombre>
+        <edad>35</edad>
+    </persona>
+    <persona>
+        <nombre>Bob</nombre>
+        <edad>25</edad>
+    </persona>
+</personas>
