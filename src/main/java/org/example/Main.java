@@ -3,9 +3,11 @@ package org.example;
 import org.example.persona.Persona;
 import org.example.xml.InvalidExtenstionException;
 import org.example.xml.XMLReader;
+import org.w3c.dom.ls.LSOutput;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -43,7 +45,10 @@ public class Main {
         System.out.println("Etiquetas del XML");
         try{
             XMLReader reader = XMLReader.XMLFactory(Persona.URL_XML);
-            System.out.println(reader.countTagTypes());
+            Map<String,Integer> tags = reader.countTagTypes();
+            for (String tag : tags.keySet().stream().sorted().toList()) {
+                System.out.println(tag + ": " + tags.get(tag));
+            }
         } catch (InvalidExtenstionException e) {
             System.out.println("No se trata de un archivo XML");
         }

@@ -1,7 +1,6 @@
 package org.example.xml;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -56,17 +55,19 @@ public class XMLReader {
     public Map<String,Integer> countTagTypes(){
         Map<String,Integer> map = new HashMap<>();
         Node root = doc.getDocumentElement();
-        addChildTags(map, root);
+        updateTagCount(map, root);
         return map;
     }
 
-    public void addChildTags (Map<String,Integer> map, Node node){
+    public void updateTagCount(Map<String,Integer> map, Node node){
         String tagName = node.getNodeName();
-        map.putIfAbsent(tagName, 1);
         map.computeIfPresent(tagName, (k,v)->v+1);
+        map.putIfAbsent(tagName, 1);
         NodeList children = node.getChildNodes();
         for (int j = 0; j < children.getLength(); j++) {
-            addChildTags(map, children.item(j));
+            if (children.item(j).hasChildNodes()) {
+                updateTagCount(map, children.item(j));
+            }
         }
     }
 
