@@ -22,16 +22,28 @@ public class Main {
         List<Persona> personasLeidas = Persona.leerPersonas();
         System.out.println("Lista de Personas leída del archivo .bin");
         personasLeidas.forEach(System.out::println);
+        System.out.println("\n");
 
         Persona.crearXML(personasLeidas);
 
         List<Persona> personasLeidasXML = Persona.leerPersonasXML();
         System.out.println("Lista de Personas leída del archivo .xml");
         System.out.println(personasLeidasXML);
+        System.out.println("\n");
 
+        System.out.println("Contenido del XML");
         try{
             XMLReader reader = XMLReader.XMLFactory(Persona.URL_XML);
             System.out.println(reader.read());
+        } catch (InvalidExtenstionException e) {
+            System.out.println("No se trata de un archivo XML");
+        }
+
+        System.out.println("\n");
+        System.out.println("Etiquetas del XML");
+        try{
+            XMLReader reader = XMLReader.XMLFactory(Persona.URL_XML);
+            System.out.println(reader.countTagTypes());
         } catch (InvalidExtenstionException e) {
             System.out.println("No se trata de un archivo XML");
         }
