@@ -1,8 +1,6 @@
 package org.example.persona;
 
-import org.w3c.dom.DOMImplementation;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+import org.w3c.dom.*;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -18,7 +16,7 @@ public class Persona implements Serializable {
     private String nombre;
     private int edad;
     private static final String URL_FILE = "src/main/resources/personas.bin";
-    private static final String URL_XML = "src/main/resources/personas.xml";
+    public static final String URL_XML = "src/main/resources/personas.xml";
 
     public Persona(String nombre, int edad) {
         this.nombre = nombre;
@@ -116,11 +114,18 @@ public class Persona implements Serializable {
         try {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document document = builder.parse(new File(URL_XML));
+            NodeList nodos = document.getElementsByTagName("persona");
+            for (int i = 0; i < nodos.getLength(); i++) {
+                Node persona = nodos.item(i);
+                Element personaElement = (Element) persona;
+                String nombre = personaElement.getElementsByTagName("nombre").item(0).getTextContent();
+                String edad = personaElement.getElementsByTagName("edad").item(0).getTextContent();
+                personas.add(new Persona(nombre, Integer.parseInt(edad)));
+            }
         }
         catch (Exception e){
             System.out.println(e.getMessage());
         }
         return personas;
     }
-
 }
