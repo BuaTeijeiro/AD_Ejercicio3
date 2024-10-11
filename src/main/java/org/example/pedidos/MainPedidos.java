@@ -36,21 +36,13 @@ public class MainPedidos {
         pedido6.addProducto(monitor)
                 .addProducto(rato);
 
-        List<Pedido> pedidos = new ArrayList<>();
-        pedidos.add(pedido1);
-        pedidos.add(pedido2);
-        pedidos.add(pedido3);
-        pedidos.add(pedido4);
-        pedidos.add(pedido5);
-        pedidos.add(pedido6);
-
-        Pedido.grabarPedidos(pedidos);
+        Pedido.grabarPedidos();
 
         List<Pedido> pedidosLeidos = Pedido.leerPedidos();
 
         pedidosLeidos.forEach(System.out::println);
 
-        Pedido.grabarPedidosXML(pedidosLeidos);
+        Pedido.grabarPedidosXML();
 
 
     }

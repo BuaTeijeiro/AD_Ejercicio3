@@ -18,6 +18,7 @@ public class Pedido implements Serializable{
     private static int CURRENT_ID = 1;
     private static final String FILE_URL = "src/main/resources/pedidos.dat";
     private static final String XML_URL = "src/main/resources/pedidos.xml";
+    private static List<Pedido> PEDIDOS_CREADOS = new ArrayList<Pedido>();
     private int id;
     private Cliente cliente;
     private List<Producto> productos = new ArrayList<Producto>();
@@ -25,6 +26,7 @@ public class Pedido implements Serializable{
     public Pedido(Cliente cliente) {
         this.id = CURRENT_ID++;
         this.cliente = cliente;
+        PEDIDOS_CREADOS.add(this);
     }
 
     public Pedido() {
@@ -70,7 +72,8 @@ public class Pedido implements Serializable{
         return salida.toString();
     }
 
-    public static void grabarPedidos(List<Pedido> pedidos) {
+    public static void grabarPedidos() {
+        List<Pedido> pedidos = PEDIDOS_CREADOS;
         try (FileOutputStream fileEscritor = new FileOutputStream(FILE_URL);
              ObjectOutputStream escritor = new ObjectOutputStream(fileEscritor);){
             for (Pedido pedido : pedidos) {
@@ -97,7 +100,8 @@ public class Pedido implements Serializable{
         return pedidos;
     }
 
-    public static void grabarPedidosXML(List<Pedido> pedidos) {
+    public static void grabarPedidosXML() {
+        List<Pedido> pedidos = PEDIDOS_CREADOS;
         try{
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             DOMImplementation domImpl = builder.getDOMImplementation();
