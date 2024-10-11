@@ -3,12 +3,13 @@ package org.example.pedidos;
 import java.io.Serializable;
 
 public class Producto implements Serializable{
+    private static int CURRENT_ID = 100;
     private int id;
     private String descripcion;
     private double precio;
 
-    public Producto(int id, String descripcion, double precio) {
-        this.id = id;
+    public Producto(String descripcion, double precio) {
+        this.id = CURRENT_ID++;
         this.descripcion = descripcion;
         this.precio = precio;
     }
@@ -41,6 +42,11 @@ public class Producto implements Serializable{
     }
 
     public String toString() {
-        return id + ": " + descripcion + "-" + precio;
+        return new StringBuilder("Id: ").append(id)
+                .append(" Nome: ")
+                .append(getDescripcion())
+                .append(" Prezo: ")
+                .append(getPrecio())
+                .toString();
     }
 }

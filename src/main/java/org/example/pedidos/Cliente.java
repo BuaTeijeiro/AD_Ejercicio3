@@ -3,11 +3,12 @@ package org.example.pedidos;
 import java.io.Serializable;
 
 public class Cliente implements Serializable {
+    private static int CURRENT_ID = 1;
     private int id;
     private String nombre;
 
-    public Cliente(int id, String nombre) {
-        this.id = id;
+    public Cliente(String nombre) {
+        this.id = CURRENT_ID++;
         this.nombre = nombre;
     }
 
@@ -29,6 +30,4 @@ public class Cliente implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-
 }
