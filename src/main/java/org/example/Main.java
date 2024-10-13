@@ -22,7 +22,14 @@ public class Main {
         Persona.guardarPersonas(personas);
 
         List<Persona> personasLeidas = Persona.leerPersonas();
-        System.out.println("Lista de Personas leída del archivo .bin");
+        System.out.println("Lista de Personas leída del archivo personas.bin");
+        personasLeidas.forEach(System.out::println);
+        System.out.println("\n");
+
+        Persona.guardarDatosPersonas(personas);
+
+        List<Persona> datosPersonasLeidas = Persona.leerDatosPersonas();
+        System.out.println("Lista de Personas leída del archivo personas_datos.bin");
         personasLeidas.forEach(System.out::println);
         System.out.println("\n");
 
@@ -45,9 +52,9 @@ public class Main {
         System.out.println("Etiquetas del XML");
         try{
             XMLReader reader = XMLReader.XMLFactory(Persona.URL_XML);
-            Map<String,Integer> tags = reader.countTagTypes();
-            for (String tag : tags.keySet().stream().sorted().toList()) {
-                System.out.println(tag + ": " + tags.get(tag));
+            Map<String,Integer> tagsCount = reader.countTagTypes();
+            for (String tag : tagsCount.keySet().stream().sorted().toList()) {
+                System.out.println(tag + ": " + tagsCount.get(tag));
             }
         } catch (InvalidExtenstionException e) {
             System.out.println("No se trata de un archivo XML");

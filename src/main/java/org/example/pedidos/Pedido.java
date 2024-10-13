@@ -72,8 +72,12 @@ public class Pedido implements Serializable{
         return salida.toString();
     }
 
+    private static List<Pedido> getPedidosCreados(){
+        return PEDIDOS_CREADOS;
+    }
+
     public static void grabarPedidos() {
-        List<Pedido> pedidos = PEDIDOS_CREADOS;
+        List<Pedido> pedidos = getPedidosCreados();
         try (FileOutputStream fileEscritor = new FileOutputStream(FILE_URL);
              ObjectOutputStream escritor = new ObjectOutputStream(fileEscritor);){
             for (Pedido pedido : pedidos) {

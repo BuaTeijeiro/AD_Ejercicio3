@@ -27,28 +27,25 @@ public class XMLReader {
         StringBuilder texto = new StringBuilder();
         try{
             Node root = doc.getDocumentElement();
-            addNodesToStringBuilder(texto, root, 0);
+            addNodeToStringBuilder(texto, root, 0);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return texto.toString();
     }
 
-    private void addNodesToStringBuilder(StringBuilder texto, Node node, int depthLevel) {
+    private void addNodeToStringBuilder(StringBuilder texto, Node node, int depthLevel) {
+        if (node.hasChildNodes()) {
+            texto.append("\t".repeat(depthLevel))
+                    .append(node.getNodeName())
+                    .append(": ");
+        } else {
+            texto.append(node.getTextContent());
+        }
         NodeList nodes = node.getChildNodes();
         for (int i = 0; i < nodes.getLength(); i++) {
             Node elementChild = nodes.item(i);
-            for (int j = 0; j < depthLevel; j++) {
-                texto.append("\t");
-            }
-            if (elementChild.hasChildNodes()) {
-                texto.append(elementChild.getNodeName())
-                        .append(":");
-            } else {
-                texto.append(elementChild.getTextContent());
-            }
-            texto.append("\n");
-            addNodesToStringBuilder(texto, elementChild, depthLevel + 1);
+            addNodeToStringBuilder(texto, elementChild, depthLevel + 1);
         }
     }
 
